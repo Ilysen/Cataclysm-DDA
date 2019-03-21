@@ -20,13 +20,16 @@
 #include "player.h"
 #include "sounds.h"
 #include "string_formatter.h"
+#include "text_snippets.h"
 #include "translations.h"
 #include "trap.h"
 #include "weather_gen.h"
 
 const efftype_id effect_glare( "glare" );
 const efftype_id effect_snow_glare( "snow_glare" );
+const efftype_id effect_starkblast( "starkblast" );
 const efftype_id effect_blind( "blind" );
+const efftype_id effect_deaf( "deaf" );
 const efftype_id effect_sleep( "sleep" );
 
 static const trait_id trait_CEPH_VISION( "CEPH_VISION" );
@@ -46,6 +49,7 @@ static bool is_player_outside()
 
 #define THUNDER_CHANCE 50
 #define LIGHTNING_CHANCE 600
+#define STARKBLOW_WARNING_INTERVAL 5_minutes
 
 /**
  * Glare.
@@ -452,10 +456,37 @@ void weather_effect::snowstorm()
 {
     wet_player( 40 );
 }
+
+void weather_effect::starkblow()
+{
+    wet_player( 5 );
+    std::string starkblow_warning = SNIPPET.random_from_category( "starkblow" );
+    if( calendar::once_every( STARKBLOW_WARNING_INTERVAL ) ) {
+        add_msg( m_bad, _( starkblow_warning ) );
+    }
+}
+
+void weather_effect::starkblast()
+{
+    if( !g->m.is_outside( g->u.pos() ) ) {
+        return;
+    }
+    wet_player( 50 );
+    g->u.add_effect( effect_starkblast, 2_turns );
+    if( !g->u.is_deaf() && calendar::once_every( 1_minutes ) ) {
+        add_msg( m_bad, _( "The screaming wind blocks all hearing!" ) );
+        g->u.add_effect( effect_deaf, 1_minutes );
+    }
+    if( one_in( 10 ) ) {
+        add_msg( m_bad, _( "You're in a starkblast!" ) );
+    }
+}
+
 /**
  * Thunder.
  * Flavor messages. Very wet.
  */
+
 void weather_effect::thunder()
 {
     very_wet();

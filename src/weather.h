@@ -55,6 +55,8 @@ enum weather_type : int {
     WEATHER_FLURRIES,     //!< Light snow
     WEATHER_SNOW,         //!< snow glare effects
     WEATHER_SNOWSTORM,    //!< sight penalties
+    WEATHER_STARKBLOW,    //!< Snowstorm effects, and warning of a starkblast
+    WEATHER_STARKBLAST,   //!< Severe freezing when caught outside
     NUM_WEATHER_TYPES     //!< Sentinel value
 };
 
@@ -107,6 +109,8 @@ void snow();
 void sunny();
 void snow_glare();
 void snowstorm();
+void starkblow();
+void starkblast();
 } //namespace weather_effect
 
 struct weather_datum {

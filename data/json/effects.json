@@ -457,6 +457,24 @@
   },
   {
     "type": "effect_type",
+    "id": "starkblast",
+    "name": [ "Starkblast" ],
+    "desc": [ "You're caught in a starkblast!  The wind blocks almost all sight and sound, and you're freezing to death extremely fast!" ],
+    "apply_message": "",
+    "rating": "bad",
+    "base_mods": { "per_mod": [ -8 ], "speed_mod": [ -50 ] }
+  },
+  {
+    "type": "effect_type",
+    "id": "starkblast_mon",
+    "name": [ "Starkblast" ],
+    "desc": [ "You're caught in a starkblast!  The wind blocks almost all sight and sound, and you're freezing to death extremely fast!" ],
+    "apply_message": "",
+    "rating": "bad",
+    "base_mods": { "per_mod": [ -8 ], "speed_mod": [ -80 ] }
+  },
+  {
+    "type": "effect_type",
     "id": "laserlocked",
     "name": [ "Laser-targeted" ],
     "desc": [ "A laser sight is targeting you!" ],

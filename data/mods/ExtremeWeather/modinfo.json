@@ -1,0 +1,11 @@
+[
+  {
+    "type": "MOD_INFO",
+    "ident": "ExtremeWeather",
+    "name": "Extreme Weather",
+    "authors": [ "Esther" ],
+    "description": "Implements destructive weather events brought on by the Cataclysm.",
+    "category": "rebalance",
+    "dependencies": [ "dda" ]
+  }
+]

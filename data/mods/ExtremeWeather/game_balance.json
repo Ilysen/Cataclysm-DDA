@@ -1,0 +1,9 @@
+[
+  {
+    "type": "EXTERNAL_OPTION",
+    "name": "EXTREME_WEATHER",
+    "info": "Enables extreme weather. If true, highly destructive weather events brought on by the Cataclysm will manifest themselves under the right conditions.",
+    "stype": "bool",
+    "value": true
+  }
+]

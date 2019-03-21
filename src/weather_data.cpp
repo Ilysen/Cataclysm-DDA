@@ -25,7 +25,9 @@ weather_animation_t get_weather_animation( weather_type const type )
         {WEATHER_LIGHTNING,    weather_animation_t {0.04f, c_light_blue,  ','}},
         {WEATHER_FLURRIES,     weather_animation_t {0.01f, c_white,   '.'}},
         {WEATHER_SNOW,         weather_animation_t {0.02f, c_white,   ','}},
-        {WEATHER_SNOWSTORM,    weather_animation_t {0.04f, c_white,   '*'}}
+        {WEATHER_SNOWSTORM,    weather_animation_t {0.04f, c_white,   '*'}},
+        {WEATHER_STARKBLOW,    weather_animation_t{ 0.02f, c_light_cyan,   '*' } },
+        {WEATHER_STARKBLAST,   weather_animation_t{ 0.05f, c_light_cyan,   '*' } }
     };
 
     const auto it = map.find( type );
@@ -97,6 +99,14 @@ weather_datum const weather_data( weather_type const type )
             weather_datum {
                 translate_marker( "Snowstorm" ), c_white, c_white_cyan, '%', 6, 1.2f, -30, 6, false,
                 &weather_effect::snowstorm
+            },
+            weather_datum {
+                translate_marker( "Starkblow" ), c_cyan, c_cyan_white, '%', 6, 1.2f, -30, 6, false,
+                &weather_effect::starkblow
+            },
+            weather_datum {
+                translate_marker( "Starkblast" ), c_light_cyan, c_light_cyan_white, '%', 6, 1.2f, -30, 6, false,
+                &weather_effect::starkblast
             }
         }};
 

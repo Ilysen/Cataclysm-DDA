@@ -3074,6 +3074,9 @@ bool vehicle::do_environmental_effects()
             needed = true;
             if( g->weather >= WEATHER_DRIZZLE && g->weather <= WEATHER_ACID_RAIN ) {
                 vp.part().blood--;
+            } else if( g->weather == WEATHER_STARKBLAST && one_in( 30 ) ) {
+                vp.part().blood--;
+                sounds::sound( vp.pos(), 10, sounds::sound_t::weather, _( "creeeeaaaak..." ) );
             }
         }
     }

@@ -13,6 +13,7 @@
 #include "json.h"
 #include "messages.h"
 #include "rng.h"
+#include "options.h"
 #include "simplexnoise.h"
 #include "weather.h"
 
@@ -148,6 +149,15 @@ weather_type weather_generator::get_weather_conditions( const w_point &w ) const
         }
         if( r == WEATHER_SNOW && w.pressure < 960 && w.windpower > 15 ) {
             r = WEATHER_SNOWSTORM;
+        }
+        if( get_option<bool>( "EXTREME_WEATHER" ) ) {
+            if( r == WEATHER_SNOWSTORM && w.windpower > 40 ) {
+                if( w.windpower >= 50 ) {
+                    r = WEATHER_STARKBLAST;
+                } else {
+                    r = WEATHER_STARKBLOW;
+                }
+            }
         }
     }
 

@@ -179,6 +179,7 @@ const efftype_id effect_pacified( "pacified" );
 const efftype_id effect_pet( "pet" );
 const efftype_id effect_relax_gas( "relax_gas" );
 const efftype_id effect_sleep( "sleep" );
+const efftype_id effect_starkblast( "starkblast" );
 const efftype_id effect_stunned( "stunned" );
 const efftype_id effect_teleglow( "teleglow" );
 const efftype_id effect_tetanus( "tetanus" );

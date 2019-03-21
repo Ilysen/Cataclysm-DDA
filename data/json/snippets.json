@@ -1694,5 +1694,40 @@
     "type": "snippet",
     "category": "pyromania_withdrawal",
     "text": [ "You think of randomly lighting a fire, but decide against it." ]
+  },
+  {
+    "type": "snippet",
+    "category": "starkblow",
+    "text": [ "You hear a series of distant pops and crunching wood..." ]
+  },
+  {
+    "type": "snippet",
+    "category": "starkblow",
+    "text": [ "A biting, freezing gust brushes your cheek..." ]
+  },
+  {
+    "type": "snippet",
+    "category": "starkblow",
+    "text": [ "A shrill, keening wind blows, far above you..." ]
+  },
+  {
+    "type": "snippet",
+    "category": "starkblow",
+    "text": [ "The clouds are turning cyan..." ]
+  },
+  {
+    "type": "snippet",
+    "category": "starkblow",
+    "text": [ "A biting, freezing wind is blowing..." ]
+  },
+  {
+    "type": "snippet",
+    "category": "starkblow",
+    "text": [ "In the distance, frost crystals glitter in the air..." ]
+  },
+  {
+    "type": "snippet",
+    "category": "starkblow",
+    "text": [ "The air grows colder around you..." ]
   }
 ]

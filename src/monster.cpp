@@ -33,6 +33,7 @@
 #include "string_formatter.h"
 #include "translations.h"
 #include "trap.h"
+#include "weather.h"
 
 // Limit the number of iterations for next upgrade_time calculations.
 // This also sets the percentage of monsters that will never upgrade.
@@ -119,6 +120,7 @@ const efftype_id effect_paralyzepoison( "paralyzepoison" );
 const efftype_id effect_poison( "poison" );
 const efftype_id effect_run( "run" );
 const efftype_id effect_shrieking( "shrieking" );
+const efftype_id effect_starkblast_mon( "starkblast_mon" );
 const efftype_id effect_stunned( "stunned" );
 const efftype_id effect_supercharged( "supercharged" );
 const efftype_id effect_tied( "tied" );
@@ -1840,6 +1842,13 @@ void monster::process_turn()
                 }
             }
             g->m.emit_field( pos(), e );
+        }
+        if( g->weather == WEATHER_STARKBLAST && g->m.is_outside( pos() ) ) {
+            if( hp <= 3 ) {
+                add_msg( m_warning, _( "The %s freezes to death!" ), name().c_str() );
+            }
+            add_effect( effect_starkblast_mon, 2_turns ); // Starkblasts slow down monsters *much* more
+            apply_damage( nullptr, bp_torso, 3 ); // We freeze to death
         }
     }
 

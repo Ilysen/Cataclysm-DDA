@@ -153,6 +153,7 @@ const efftype_id effect_shakes( "shakes" );
 const efftype_id effect_sleep( "sleep" );
 const efftype_id effect_slept_through_alarm( "slept_through_alarm" );
 const efftype_id effect_spores( "spores" );
+const efftype_id effect_starkblast( "starkblast" );
 const efftype_id effect_stim( "stim" );
 const efftype_id effect_stim_overdose( "stim_overdose" );
 const efftype_id effect_stunned( "stunned" );
@@ -1015,7 +1016,7 @@ void player::update_bodytemp()
     const bool has_heatsink = has_bionic( bio_heatsink ) || is_wearing( "rm13_armor_on" ) ||
                               has_trait( trait_M_SKIN2 ) || has_trait( trait_M_SKIN3 );
     const bool has_common_cold = has_effect( effect_common_cold );
-    const bool has_climate_control = in_climate_control();
+    bool has_climate_control = in_climate_control();
     const bool use_floor_warmth = can_use_floor_warmth();
     const furn_id furn_at_pos = g->m.furn( pos() );
     // Temperature norms
@@ -1041,6 +1042,10 @@ void player::update_bodytemp()
     // Sunlight
     const int sunlight_warmth = g->is_in_sunlight( pos() ) ? 0 :
                                 ( g->weather == WEATHER_SUNNY ? 1000 : 500 );
+    // Starkblast
+    int starkblast_chill = !g->m.is_outside( pos() ) ? 0 : ( g->weather == WEATHER_STARKBLAST ? -7000 :
+                           0 );
+
     const int best_fire = get_heat_radiation( pos(), true );
 
     const int lying_warmth = use_floor_warmth ? floor_warmth( pos() ) : 0;
@@ -1134,6 +1139,11 @@ void player::update_bodytemp()
         }
 
         temp_conv[bp] += sunlight_warmth;
+        if( g->weather == WEATHER_STARKBLAST && starkblast_chill < 0 && has_climate_control ) {
+            has_climate_control = false;
+            starkblast_chill *= 0.5f; // Makes them a little less awful though!
+        }
+        temp_conv[bp] += starkblast_chill;
         // DISEASES
         if( bp == bp_head && has_effect( effect_flu ) ) {
             temp_conv[bp] += 1500;
@@ -12028,7 +12038,7 @@ float player::hearing_ability() const
         volume_multiplier *= ( 30_minutes - get_effect_dur( effect_deaf ) ) / 30_minutes;
     }
 
-    if( has_effect( effect_earphones ) ) {
+    if( has_effect( effect_earphones ) || has_effect( effect_starkblast ) ) {
         volume_multiplier *= .25;
     }
 
